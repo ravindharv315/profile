@@ -9,7 +9,7 @@
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 :root{
   --ink:#1a1612;--ink2:#4a4540;--ink3:#8a7f78;
-  --paper:#f5f1ec;--paper2:#ede8e1;--paper3:#e2dcd4;
+  --paper:#f5f1ec;--paper2:#ede8e1;
   --accent:#b94a2c;--accent2:#d4703a;
   --border:rgba(26,22,18,0.13);
   --green:#2d6a2d;--green-bg:#edf7ed;--green-bd:#b8ddb8;
@@ -30,23 +30,27 @@ header::after{content:'';position:absolute;bottom:-40px;left:120px;width:180px;h
 .contact-strip a,.contact-strip span{font-size:0.8rem;color:rgba(245,241,236,0.72);text-decoration:none;display:flex;align-items:center;gap:5px;}
 .contact-strip a:hover{color:var(--accent2);}
 .ci{width:13px;height:13px;fill:var(--accent);flex-shrink:0;}
-.header-edit-btn{background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.25);color:rgba(255,255,255,0.8);font-family:var(--font-sans);font-size:0.75rem;padding:7px 16px;border-radius:6px;cursor:pointer;transition:all 0.2s;}
-.header-edit-btn:hover{background:rgba(255,255,255,0.2);}
 
 /* LAYOUT */
 .page{max-width:1200px;margin:0 auto;padding:2rem 1.5rem;display:grid;grid-template-columns:1fr 340px;gap:2rem;align-items:start;}
 .main{display:flex;flex-direction:column;gap:1.8rem;}
 .sidebar{display:flex;flex-direction:column;gap:1.5rem;}
 
-/* SECTION */
+/* SECTION HEAD */
 .sec-head{font-size:0.68rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:1rem;padding-bottom:7px;border-bottom:1.5px solid var(--accent);display:flex;align-items:center;justify-content:space-between;}
 .sec-head-left{display:flex;align-items:center;gap:8px;}
 .sec-head svg.si{width:13px;height:13px;fill:var(--accent);}
+.btn-group{display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
 .add-btn{font-family:var(--font-sans);font-size:0.72rem;padding:4px 12px;border-radius:99px;border:1px dashed var(--accent);background:transparent;color:var(--accent);cursor:pointer;font-weight:500;display:flex;align-items:center;gap:4px;transition:all 0.15s;white-space:nowrap;}
 .add-btn:hover{background:var(--accent);color:#fff;}
 
 /* ABOUT */
-.about-text{font-size:0.94rem;line-height:1.8;color:var(--ink2);font-weight:300;}
+.about-wrapper{position:relative;}
+.about-text{font-size:0.94rem;line-height:1.8;color:var(--ink2);font-weight:300;border:1.5px solid transparent;border-radius:8px;padding:10px 12px;transition:border-color 0.2s,background 0.2s;outline:none;min-height:60px;}
+.about-text[contenteditable="true"]:hover{border-color:var(--border);background:rgba(255,255,255,0.5);}
+.about-text[contenteditable="true"]:focus{border-color:var(--accent);background:#fff;}
+.about-edit-hint{font-size:0.72rem;color:var(--ink3);margin-top:5px;display:flex;align-items:center;gap:5px;padding-left:12px;}
+.about-edit-hint svg{width:11px;height:11px;fill:var(--ink3);}
 
 /* JOB */
 .job{margin-bottom:1.4rem;padding-bottom:1.4rem;border-bottom:0.5px solid var(--border);position:relative;}
@@ -58,6 +62,12 @@ header::after{content:'';position:absolute;bottom:-40px;left:120px;width:180px;h
 .job-bullets{list-style:none;margin-top:7px;display:flex;flex-direction:column;gap:4px;}
 .job-bullets li{font-size:0.86rem;color:var(--ink2);font-weight:300;line-height:1.6;padding-left:14px;position:relative;}
 .job-bullets li::before{content:'–';position:absolute;left:0;color:var(--accent);}
+.job-actions{display:flex;gap:6px;margin-top:10px;padding-top:8px;border-top:0.5px dashed var(--border);}
+.job-btn{font-family:var(--font-sans);font-size:0.72rem;padding:4px 12px;border-radius:6px;cursor:pointer;font-weight:500;transition:all 0.15s;display:inline-flex;align-items:center;gap:4px;border:1px solid var(--border);background:#fff;color:var(--ink2);}
+.job-btn:hover{border-color:var(--accent);color:var(--accent);}
+.job-btn.danger{color:#c0392b;border-color:#e8b4b0;}
+.job-btn.danger:hover{background:#fdf0ef;}
+.job-btn svg{width:11px;height:11px;fill:currentColor;}
 
 /* EDU */
 .edu-item{margin-bottom:1rem;padding-bottom:1rem;border-bottom:0.5px solid var(--border);position:relative;}
@@ -100,43 +110,44 @@ header::after{content:'';position:absolute;bottom:-40px;left:120px;width:180px;h
 .btn-attach:hover{border-color:var(--accent);color:var(--accent);}
 .btn-attach.primary{background:var(--accent);color:#fff;border-color:var(--accent);}
 .btn-attach.primary:hover{background:#a03820;}
-.btn-attach.danger{background:transparent;color:#c0392b;border-color:#e8b4b0;}
+.btn-attach.danger{color:#c0392b;border-color:#e8b4b0;}
 .btn-attach.danger:hover{background:#fdf0ef;}
 input[type="file"]{display:none;}
 
 /* CERT */
 .cert-item{padding:8px 0;border-bottom:0.5px solid var(--border);font-size:0.84rem;color:var(--ink2);line-height:1.5;display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
 .cert-item:last-child{border-bottom:none;}
-.cert-tag{display:inline-block;font-size:0.67rem;padding:2px 8px;background:var(--paper2);border-radius:4px;color:var(--ink3);margin-top:3px;flex-shrink:0;}
+.cert-tag{display:inline-block;font-size:0.67rem;padding:2px 8px;background:var(--paper2);border-radius:4px;color:var(--ink3);margin-top:3px;}
 
 /* LANG */
 .lang-row{display:flex;gap:7px;flex-wrap:wrap;padding:4px 0;}
 .lang-chip{font-size:0.81rem;padding:5px 14px;border-radius:99px;border:1px solid var(--border);color:var(--ink2);background:var(--paper2);display:flex;align-items:center;gap:6px;}
 
-/* CUSTOM SECTION */
-.custom-section-card{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:0;}
-.custom-sec-head{background:var(--ink);color:var(--paper);font-size:0.67rem;letter-spacing:0.16em;text-transform:uppercase;font-weight:500;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;}
-.custom-sec-head svg{width:13px;height:13px;fill:var(--accent2);}
-.custom-sec-body{padding:14px 16px;}
+/* CUSTOM */
 .custom-item{padding:8px 0;border-bottom:0.5px solid var(--border);font-size:0.84rem;color:var(--ink2);display:flex;justify-content:space-between;align-items:flex-start;gap:8px;}
 .custom-item:last-child{border-bottom:none;}
 
-/* ADD ZONE */
-.add-zone{border:1.5px dashed var(--border);border-radius:8px;padding:14px;text-align:center;cursor:pointer;transition:all 0.2s;background:transparent;margin-top:10px;}
-.add-zone:hover{border-color:var(--accent);background:#fff8f6;}
-.add-zone p{font-size:0.78rem;color:var(--ink3);margin-top:5px;}
-.add-zone svg{fill:var(--ink3);width:20px;height:20px;}
+/* NEW SECTION */
+.new-section-box{border:1.5px dashed var(--border);border-radius:12px;padding:1.2rem;text-align:center;cursor:pointer;transition:all 0.2s;background:transparent;}
+.new-section-box:hover{border-color:var(--accent);background:#fff8f6;}
+.new-section-box p{font-size:0.82rem;color:var(--ink3);margin-top:6px;}
+.new-section-box svg{fill:var(--ink3);width:22px;height:22px;}
 
-/* MODAL */
+/* REMOVE */
+.remove-btn{font-size:0.7rem;padding:2px 8px;border-radius:4px;border:1px solid #e8b4b0;background:transparent;color:#c0392b;cursor:pointer;flex-shrink:0;font-family:var(--font-sans);}
+.remove-btn:hover{background:#fdf0ef;}
+
+/* ── MODAL ── */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:1000;align-items:center;justify-content:center;}
 .modal-overlay.open{display:flex;}
-.modal{background:#fff;border-radius:14px;padding:1.8rem;width:min(500px,92vw);max-height:90vh;overflow-y:auto;position:relative;}
-.modal h3{font-family:var(--font-serif);font-size:1.3rem;margin-bottom:1.2rem;color:var(--ink);}
-.modal label{display:block;font-size:0.78rem;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink3);margin-bottom:5px;margin-top:12px;font-weight:500;}
+.modal{background:#fff;border-radius:14px;padding:1.8rem;width:min(540px,94vw);max-height:90vh;overflow-y:auto;position:relative;}
+.modal h3{font-family:var(--font-serif);font-size:1.25rem;margin-bottom:1.2rem;color:var(--ink);}
+.modal label{display:block;font-size:0.75rem;letter-spacing:0.07em;text-transform:uppercase;color:var(--ink3);margin:12px 0 5px;font-weight:500;}
 .modal label:first-of-type{margin-top:0;}
 .modal input[type="text"],.modal textarea,.modal select{width:100%;border:1px solid var(--border);border-radius:8px;padding:9px 12px;font-family:var(--font-sans);font-size:0.9rem;color:var(--ink);background:var(--paper);outline:none;transition:border-color 0.2s;}
 .modal input[type="text"]:focus,.modal textarea:focus{border-color:var(--accent);}
-.modal textarea{resize:vertical;min-height:80px;}
+.modal textarea{resize:vertical;min-height:90px;line-height:1.6;}
+.modal-hint{font-size:0.76rem;color:var(--ink3);margin-top:4px;}
 .modal-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:1.4rem;}
 .modal-actions button{font-family:var(--font-sans);font-size:0.84rem;padding:8px 20px;border-radius:8px;cursor:pointer;font-weight:500;transition:all 0.15s;}
 .btn-cancel{background:transparent;border:1px solid var(--border);color:var(--ink3);}
@@ -144,36 +155,47 @@ input[type="file"]{display:none;}
 .btn-save{background:var(--accent);color:#fff;border:1px solid var(--accent);}
 .btn-save:hover{background:#a03820;}
 
-/* REMOVE BTN */
-.remove-btn{font-size:0.7rem;padding:2px 8px;border-radius:4px;border:1px solid #e8b4b0;background:transparent;color:#c0392b;cursor:pointer;flex-shrink:0;font-family:var(--font-sans);}
-.remove-btn:hover{background:#fdf0ef;}
+/* EDIT HIGHLIGHT */
+[contenteditable="true"]{outline:none;}
+.editable-field{border:1.5px solid transparent;border-radius:6px;padding:3px 7px;transition:border-color 0.18s,background 0.18s;cursor:text;}
+.editable-field:hover{border-color:rgba(185,74,44,0.35);background:rgba(255,255,255,0.6);}
+.editable-field:focus{border-color:var(--accent);background:#fff;outline:none;}
 
-/* NEW SECTION PROMPT */
-.new-section-box{border:1.5px dashed var(--border);border-radius:12px;padding:1.2rem;text-align:center;cursor:pointer;transition:all 0.2s;background:transparent;}
-.new-section-box:hover{border-color:var(--accent);background:#fff8f6;}
-.new-section-box p{font-size:0.82rem;color:var(--ink3);margin-top:6px;}
-.new-section-box svg{fill:var(--ink3);width:22px;height:22px;}
-
-@media(max-width:780px){
-  .page{grid-template-columns:1fr;}
-  header{padding:2rem 1.2rem;}
-}
+@media(max-width:780px){.page{grid-template-columns:1fr;}header{padding:2rem 1.2rem;}}
 </style>
 </head>
 <body>
 
-<!-- MODALS -->
+<!-- ══ MODALS ══ -->
+
+<!-- EDIT EXPERIENCE -->
+<div class="modal-overlay" id="modal-edit-exp">
+  <div class="modal">
+    <h3 id="edit-exp-heading">Edit Experience</h3>
+    <label>Job Title</label>
+    <input type="text" id="ee-title"/>
+    <label>Company &amp; Location</label>
+    <input type="text" id="ee-company"/>
+    <label>Duration</label>
+    <input type="text" id="ee-date" placeholder="e.g. Jun 2026 – Present"/>
+    <label>Bullet Points <span class="modal-hint">(one per line)</span></label>
+    <textarea id="ee-bullets" rows="7"></textarea>
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal('modal-edit-exp')">Cancel</button>
+      <button class="btn-save" onclick="applyEditExp()">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- ADD EXPERIENCE -->
 <div class="modal-overlay" id="modal-exp">
   <div class="modal">
     <h3>Add Experience</h3>
-    <label>Job Title</label>
-    <input type="text" id="exp-title" placeholder="e.g. Design Engineer"/>
-    <label>Company & Location</label>
-    <input type="text" id="exp-company" placeholder="e.g. L&T, Coimbatore"/>
-    <label>Duration</label>
-    <input type="text" id="exp-date" placeholder="e.g. Jun 2026 – Present"/>
-    <label>Key Points (one per line)</label>
-    <textarea id="exp-bullets" placeholder="Designed components for tire curing presses&#10;Created 2D & 3D models using Creo"></textarea>
+    <label>Job Title</label><input type="text" id="exp-title" placeholder="e.g. Design Engineer"/>
+    <label>Company &amp; Location</label><input type="text" id="exp-company" placeholder="e.g. L&T, Coimbatore"/>
+    <label>Duration</label><input type="text" id="exp-date" placeholder="e.g. Jun 2026 – Present"/>
+    <label>Key Points <span class="modal-hint">(one per line)</span></label>
+    <textarea id="exp-bullets" placeholder="Designed components for tire presses&#10;Created 3D models using Creo"></textarea>
     <div class="modal-actions">
       <button class="btn-cancel" onclick="closeModal('modal-exp')">Cancel</button>
       <button class="btn-save" onclick="saveExp()">Add</button>
@@ -181,15 +203,13 @@ input[type="file"]{display:none;}
   </div>
 </div>
 
+<!-- ADD EDUCATION -->
 <div class="modal-overlay" id="modal-edu">
   <div class="modal">
     <h3>Add Education</h3>
-    <label>Degree / Qualification</label>
-    <input type="text" id="edu-deg" placeholder="e.g. B.E. Mechanical Engineering"/>
-    <label>Institution</label>
-    <input type="text" id="edu-school" placeholder="e.g. VCET, Thindal, TN"/>
-    <label>Year & Score</label>
-    <input type="text" id="edu-meta" placeholder="e.g. 2021–2025 · CGPA: 8.78"/>
+    <label>Degree / Qualification</label><input type="text" id="edu-deg" placeholder="e.g. B.E. Mechanical Engineering"/>
+    <label>Institution</label><input type="text" id="edu-school" placeholder="e.g. VCET, Thindal, TN"/>
+    <label>Year &amp; Score</label><input type="text" id="edu-meta" placeholder="e.g. 2021–2025 · CGPA: 8.78"/>
     <div class="modal-actions">
       <button class="btn-cancel" onclick="closeModal('modal-edu')">Cancel</button>
       <button class="btn-save" onclick="saveEdu()">Add</button>
@@ -197,18 +217,14 @@ input[type="file"]{display:none;}
   </div>
 </div>
 
+<!-- ADD SKILL -->
 <div class="modal-overlay" id="modal-skill">
   <div class="modal">
     <h3>Add Skill</h3>
-    <label>Category</label>
-    <input type="text" id="skill-cat" placeholder="e.g. CAD, Programming, Soft Skills"/>
-    <label>Skills (comma separated)</label>
-    <input type="text" id="skill-items" placeholder="e.g. SolidWorks, MATLAB, Python"/>
+    <label>Category</label><input type="text" id="skill-cat" placeholder="e.g. Programming"/>
+    <label>Skills <span class="modal-hint">(comma separated)</span></label><input type="text" id="skill-items" placeholder="e.g. Python, MATLAB, C++"/>
     <label>Style</label>
-    <select id="skill-style">
-      <option value="">Normal</option>
-      <option value="strong">Bold (highlight)</option>
-    </select>
+    <select id="skill-style"><option value="">Normal</option><option value="strong">Bold (highlight)</option></select>
     <div class="modal-actions">
       <button class="btn-cancel" onclick="closeModal('modal-skill')">Cancel</button>
       <button class="btn-save" onclick="saveSkill()">Add</button>
@@ -216,6 +232,7 @@ input[type="file"]{display:none;}
   </div>
 </div>
 
+<!-- ADD ACHIEVEMENT -->
 <div class="modal-overlay" id="modal-ach">
   <div class="modal">
     <h3>Add Achievement</h3>
@@ -228,13 +245,12 @@ input[type="file"]{display:none;}
   </div>
 </div>
 
+<!-- ADD CERTIFICATION -->
 <div class="modal-overlay" id="modal-cert">
   <div class="modal">
     <h3>Add Certification</h3>
-    <label>Certification Name</label>
-    <input type="text" id="cert-name" placeholder="e.g. Six Sigma Green Belt"/>
-    <label>Issuer / Platform</label>
-    <input type="text" id="cert-issuer" placeholder="e.g. IIT NPTEL, Coursera"/>
+    <label>Certification Name</label><input type="text" id="cert-name" placeholder="e.g. Six Sigma Green Belt"/>
+    <label>Issuer / Platform</label><input type="text" id="cert-issuer" placeholder="e.g. IIT NPTEL, Coursera"/>
     <div class="modal-actions">
       <button class="btn-cancel" onclick="closeModal('modal-cert')">Cancel</button>
       <button class="btn-save" onclick="saveCert()">Add</button>
@@ -242,13 +258,12 @@ input[type="file"]{display:none;}
   </div>
 </div>
 
+<!-- ADD LANGUAGE -->
 <div class="modal-overlay" id="modal-lang">
   <div class="modal">
     <h3>Add Language</h3>
-    <label>Language</label>
-    <input type="text" id="lang-name" placeholder="e.g. Hindi, French"/>
-    <label>Proficiency (optional)</label>
-    <input type="text" id="lang-level" placeholder="e.g. Native, Conversational"/>
+    <label>Language</label><input type="text" id="lang-name" placeholder="e.g. Hindi"/>
+    <label>Proficiency <span class="modal-hint">(optional)</span></label><input type="text" id="lang-level" placeholder="e.g. Native, Conversational"/>
     <div class="modal-actions">
       <button class="btn-cancel" onclick="closeModal('modal-lang')">Cancel</button>
       <button class="btn-save" onclick="saveLang()">Add</button>
@@ -256,13 +271,12 @@ input[type="file"]{display:none;}
   </div>
 </div>
 
+<!-- ADD PROJECT -->
 <div class="modal-overlay" id="modal-proj">
   <div class="modal">
     <h3>Add Project</h3>
-    <label>Project Title</label>
-    <input type="text" id="proj-title" placeholder="e.g. Robotic Arm Design"/>
-    <label>Description</label>
-    <textarea id="proj-desc" placeholder="Brief description of the project..."></textarea>
+    <label>Project Title</label><input type="text" id="proj-title" placeholder="e.g. Robotic Arm Design"/>
+    <label>Description</label><textarea id="proj-desc" placeholder="Brief description..."></textarea>
     <div class="modal-actions">
       <button class="btn-cancel" onclick="closeModal('modal-proj')">Cancel</button>
       <button class="btn-save" onclick="saveProj()">Add</button>
@@ -270,25 +284,24 @@ input[type="file"]{display:none;}
   </div>
 </div>
 
+<!-- CUSTOM SECTION -->
 <div class="modal-overlay" id="modal-custom-section">
   <div class="modal">
     <h3>Add Custom Section</h3>
-    <label>Section Title</label>
-    <input type="text" id="custom-sec-title" placeholder="e.g. Publications, Volunteering, Interests"/>
+    <label>Section Title</label><input type="text" id="custom-sec-title" placeholder="e.g. Publications, Volunteering"/>
     <div class="modal-actions">
       <button class="btn-cancel" onclick="closeModal('modal-custom-section')">Cancel</button>
-      <button class="btn-save" onclick="saveCustomSection()">Create Section</button>
+      <button class="btn-save" onclick="saveCustomSection()">Create</button>
     </div>
   </div>
 </div>
 
+<!-- CUSTOM ITEM -->
 <div class="modal-overlay" id="modal-custom-item">
   <div class="modal">
     <h3 id="custom-item-title">Add Item</h3>
-    <label>Title / Name</label>
-    <input type="text" id="custom-item-name" placeholder="Item title"/>
-    <label>Detail (optional)</label>
-    <input type="text" id="custom-item-detail" placeholder="Additional info"/>
+    <label>Title / Name</label><input type="text" id="custom-item-name" placeholder="Item title"/>
+    <label>Detail <span class="modal-hint">(optional)</span></label><input type="text" id="custom-item-detail" placeholder="Additional info"/>
     <div class="modal-actions">
       <button class="btn-cancel" onclick="closeModal('modal-custom-item')">Cancel</button>
       <button class="btn-save" onclick="saveCustomItem()">Add</button>
@@ -296,7 +309,7 @@ input[type="file"]{display:none;}
   </div>
 </div>
 
-<!-- HEADER -->
+<!-- ══ HEADER ══ -->
 <header>
   <div class="header-inner">
     <div>
@@ -319,13 +332,12 @@ input[type="file"]{display:none;}
         </span>
       </div>
     </div>
-    <button class="header-edit-btn" onclick="alert('To edit your name/contact, open the HTML file in a text editor and update the header section.')">Edit Header</button>
   </div>
 </header>
 
 <div class="page">
 
-<!-- ══ MAIN COLUMN ══ -->
+<!-- ══ MAIN ══ -->
 <main class="main">
 
   <!-- ABOUT -->
@@ -336,7 +348,13 @@ input[type="file"]{display:none;}
         About
       </div>
     </div>
-    <p class="about-text" contenteditable="true" title="Click to edit">Mechanical Engineering graduate from VCET (CGPA 8.78) with a minor in AI, currently working as an Associate Design/Drafting Engineer at L&amp;T Product Development Centre, Coimbatore. Experienced in 3D/2D design of complex mechanical systems — from tire curing presses to composite bicycle frames — using PTC Creo, ZWCAD, GD&amp;T standards, and PLM tools like Windchill and Teamcenter. Passionate about precision engineering, sustainable design, and turning ideas into manufacturable products.</p>
+    <div class="about-wrapper">
+      <p class="about-text" id="about-text" contenteditable="true">Mechanical Engineering graduate from VCET (CGPA 8.78) with a minor in AI, currently working as an Associate Design/Drafting Engineer at L&amp;T Product Development Centre, Coimbatore. Experienced in 3D/2D design of complex mechanical systems — from tire curing presses to composite bicycle frames — using PTC Creo, ZWCAD, GD&amp;T standards, and PLM tools like Windchill and Teamcenter. Passionate about precision engineering, sustainable design, and turning ideas into manufacturable products.</p>
+      <p class="about-edit-hint">
+        <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+        Click anywhere in the text above to edit
+      </p>
+    </div>
   </div>
 
   <!-- EXPERIENCE -->
@@ -349,12 +367,17 @@ input[type="file"]{display:none;}
       <button class="add-btn" onclick="openModal('modal-exp')">+ Add</button>
     </div>
     <div id="exp-list">
-      <div class="job">
+
+      <!-- JOB 1 -->
+      <div class="job" data-jobid="j1">
         <div class="job-header">
-          <div><div class="job-title">Associate Design / Drafting Engineer</div><div class="job-company">L&amp;T Product Development Centre, Coimbatore</div></div>
-          <span class="job-date">Jun 2026 – Present</span>
+          <div>
+            <div class="job-title" id="j1-title">Associate Design / Drafting Engineer</div>
+            <div class="job-company" id="j1-company">L&amp;T Product Development Centre, Coimbatore</div>
+          </div>
+          <span class="job-date" id="j1-date">Jun 2026 – Present</span>
         </div>
-        <ul class="job-bullets">
+        <ul class="job-bullets" id="j1-bullets">
           <li>Designed and developed components for tire curing presses (loader &amp; unloader, columns, PCI, conveyors, grippers) and tire building machines (1st &amp; 2nd stage TBM, servicers).</li>
           <li>Created 2D drawings and 3D models using PTC Creo and ZWCAD.</li>
           <li>Successfully delivered 5 major projects within deadlines.</li>
@@ -362,19 +385,45 @@ input[type="file"]{display:none;}
           <li>Collaborated with manufacturing teams for design feasibility, cost optimisation, and performance improvement.</li>
           <li>Applied GD&amp;T standards and supported design modifications and troubleshooting.</li>
         </ul>
-      </div>
-      <div class="job">
-        <div class="job-header">
-          <div><div class="job-title">Intern – Mechanical Design</div><div class="job-company">L&amp;T Product Development Centre, Coimbatore</div></div>
-          <span class="job-date">Jan 2025 – May 2025</span>
+        <div class="job-actions">
+          <button class="job-btn" onclick="openEditExp('j1')">
+            <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+            Edit
+          </button>
+          <button class="job-btn danger" onclick="this.closest('.job').remove()">
+            <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+            Remove
+          </button>
         </div>
-        <ul class="job-bullets">
+      </div>
+
+      <!-- JOB 2 -->
+      <div class="job" data-jobid="j2">
+        <div class="job-header">
+          <div>
+            <div class="job-title" id="j2-title">Intern – Mechanical Design</div>
+            <div class="job-company" id="j2-company">L&amp;T Product Development Centre, Coimbatore</div>
+          </div>
+          <span class="job-date" id="j2-date">Jan 2025 – May 2025</span>
+        </div>
+        <ul class="job-bullets" id="j2-bullets">
           <li>Prepared 2D drawings and basic 3D models using Creo and ZWCAD.</li>
           <li>Assisted in developing concept designs for mechanical components.</li>
           <li>Gained hands-on exposure to PLM tools: PTC Windchill and Siemens Teamcenter.</li>
           <li>Applied basic GD&amp;T concepts in engineering drawings.</li>
         </ul>
+        <div class="job-actions">
+          <button class="job-btn" onclick="openEditExp('j2')">
+            <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+            Edit
+          </button>
+          <button class="job-btn danger" onclick="this.closest('.job').remove()">
+            <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+            Remove
+          </button>
+        </div>
       </div>
+
     </div>
   </div>
 
@@ -388,22 +437,10 @@ input[type="file"]{display:none;}
       <button class="add-btn" onclick="openModal('modal-skill')">+ Add</button>
     </div>
     <div class="skills-groups" id="skills-list">
-      <div class="skill-row" id="sr-CAD">
-        <span class="skill-cat">CAD</span>
-        <div class="skill-pills"><span class="pill strong">PTC Creo</span><span class="pill strong">AutoCAD</span><span class="pill">ZWCAD</span></div>
-      </div>
-      <div class="skill-row" id="sr-PLM">
-        <span class="skill-cat">PLM</span>
-        <div class="skill-pills"><span class="pill strong">Windchill</span><span class="pill strong">Teamcenter</span><span class="pill">Wrench Enterprise</span></div>
-      </div>
-      <div class="skill-row" id="sr-ERP">
-        <span class="skill-cat">ERP</span>
-        <div class="skill-pills"><span class="pill">SAP</span></div>
-      </div>
-      <div class="skill-row" id="sr-Design">
-        <span class="skill-cat">Design</span>
-        <div class="skill-pills"><span class="pill">GD&amp;T</span><span class="pill">BOM Management</span><span class="pill">Composite Layup</span><span class="pill">FSAM</span></div>
-      </div>
+      <div class="skill-row" id="sr-CAD"><span class="skill-cat">CAD</span><div class="skill-pills"><span class="pill strong">PTC Creo</span><span class="pill strong">AutoCAD</span><span class="pill">ZWCAD</span></div></div>
+      <div class="skill-row" id="sr-PLM"><span class="skill-cat">PLM</span><div class="skill-pills"><span class="pill strong">Windchill</span><span class="pill strong">Teamcenter</span><span class="pill">Wrench Enterprise</span></div></div>
+      <div class="skill-row" id="sr-ERP"><span class="skill-cat">ERP</span><div class="skill-pills"><span class="pill">SAP</span></div></div>
+      <div class="skill-row" id="sr-Design"><span class="skill-cat">Design</span><div class="skill-pills"><span class="pill">GD&amp;T</span><span class="pill">BOM Management</span><span class="pill">Composite Layup</span><span class="pill">FSAM</span></div></div>
     </div>
   </div>
 
@@ -449,10 +486,8 @@ input[type="file"]{display:none;}
     </ul>
   </div>
 
-  <!-- CUSTOM SECTIONS (main) -->
   <div id="main-custom-sections"></div>
 
-  <!-- ADD CUSTOM SECTION -->
   <div class="new-section-box" onclick="openCustomSectionModal('main')">
     <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
     <p>Add a new section to main column</p>
@@ -474,32 +509,32 @@ input[type="file"]{display:none;}
     </div>
     <div class="sidebar-card-body">
       <div id="proj-list">
-        <div class="proj-file" id="pf1">
+        <div class="proj-file">
           <div class="proj-file-name">Friction Stir Additive Manufacturing</div>
           <div class="proj-file-desc">Multi-layered Al 6061 structures — ~15–20% strength improvement &amp; defect-free builds. (2025)</div>
           <div id="pf1-badge" class="file-badge"><svg style="width:12px;height:12px;fill:var(--green)" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span id="pf1-name"></span></div>
           <div class="proj-file-actions">
-            <label class="btn-attach primary" for="fi1"><svg style="width:11px;height:11px;fill:#fff" viewBox="0 0 24 24"><path d="M16.5 6v11.5c0 2.21-1.79 4-4 4s-4-1.79-4-4V5c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5v10.5c0 .55-.45 1-1 1s-1-.45-1-1V6H10v9.5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5V5c0-2.21-1.79-4-4-4S7 2.79 7 5v12.5c0 3.04 2.46 5.5 5.5 5.5s5.5-2.46 5.5-5.5V6h-1.5z"/></svg> Attach file</label>
+            <label class="btn-attach primary" for="fi1"><svg style="width:11px;height:11px;fill:#fff" viewBox="0 0 24 24"><path d="M16.5 6v11.5c0 2.21-1.79 4-4 4s-4-1.79-4-4V5c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5v10.5c0 .55-.45 1-1 1s-1-.45-1-1V6H10v9.5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5V5c0-2.21-1.79-4-4-4S7 2.79 7 5v12.5c0 3.04 2.46 5.5 5.5 5.5s5.5-2.46 5.5-5.5V6h-1.5z"/></svg> Attach</label>
             <input type="file" id="fi1" accept=".pdf,.docx,.pptx,.zip,.png,.jpg" onchange="attachFile(this,'pf1-badge','pf1-name')"/>
             <button class="btn-attach danger" onclick="this.closest('.proj-file').remove()">Remove</button>
           </div>
         </div>
-        <div class="proj-file" id="pf2">
+        <div class="proj-file">
           <div class="proj-file-name">Composite Bicycle Frame</div>
           <div class="proj-file-desc">Double-frame glass fibre composite bicycle. 3rd SAEISS BDC 2024, 2nd VCET Expo 2024.</div>
           <div id="pf2-badge" class="file-badge"><svg style="width:12px;height:12px;fill:var(--green)" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span id="pf2-name"></span></div>
           <div class="proj-file-actions">
-            <label class="btn-attach primary" for="fi2"><svg style="width:11px;height:11px;fill:#fff" viewBox="0 0 24 24"><path d="M16.5 6v11.5c0 2.21-1.79 4-4 4s-4-1.79-4-4V5c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5v10.5c0 .55-.45 1-1 1s-1-.45-1-1V6H10v9.5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5V5c0-2.21-1.79-4-4-4S7 2.79 7 5v12.5c0 3.04 2.46 5.5 5.5 5.5s5.5-2.46 5.5-5.5V6h-1.5z"/></svg> Attach file</label>
+            <label class="btn-attach primary" for="fi2"><svg style="width:11px;height:11px;fill:#fff" viewBox="0 0 24 24"><path d="M16.5 6v11.5c0 2.21-1.79 4-4 4s-4-1.79-4-4V5c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5v10.5c0 .55-.45 1-1 1s-1-.45-1-1V6H10v9.5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5V5c0-2.21-1.79-4-4-4S7 2.79 7 5v12.5c0 3.04 2.46 5.5 5.5 5.5s5.5-2.46 5.5-5.5V6h-1.5z"/></svg> Attach</label>
             <input type="file" id="fi2" accept=".pdf,.docx,.pptx,.zip,.png,.jpg" onchange="attachFile(this,'pf2-badge','pf2-name')"/>
             <button class="btn-attach danger" onclick="this.closest('.proj-file').remove()">Remove</button>
           </div>
         </div>
-        <div class="proj-file" id="pf3">
+        <div class="proj-file">
           <div class="proj-file-name">E-Park Energy System</div>
           <div class="proj-file-desc">Converting rotational kinetic energy from park rides into electrical energy. (2023)</div>
           <div id="pf3-badge" class="file-badge"><svg style="width:12px;height:12px;fill:var(--green)" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span id="pf3-name"></span></div>
           <div class="proj-file-actions">
-            <label class="btn-attach primary" for="fi3"><svg style="width:11px;height:11px;fill:#fff" viewBox="0 0 24 24"><path d="M16.5 6v11.5c0 2.21-1.79 4-4 4s-4-1.79-4-4V5c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5v10.5c0 .55-.45 1-1 1s-1-.45-1-1V6H10v9.5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5V5c0-2.21-1.79-4-4-4S7 2.79 7 5v12.5c0 3.04 2.46 5.5 5.5 5.5s5.5-2.46 5.5-5.5V6h-1.5z"/></svg> Attach file</label>
+            <label class="btn-attach primary" for="fi3"><svg style="width:11px;height:11px;fill:#fff" viewBox="0 0 24 24"><path d="M16.5 6v11.5c0 2.21-1.79 4-4 4s-4-1.79-4-4V5c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5v10.5c0 .55-.45 1-1 1s-1-.45-1-1V6H10v9.5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5V5c0-2.21-1.79-4-4-4S7 2.79 7 5v12.5c0 3.04 2.46 5.5 5.5 5.5s5.5-2.46 5.5-5.5V6h-1.5z"/></svg> Attach</label>
             <input type="file" id="fi3" accept=".pdf,.docx,.pptx,.zip,.png,.jpg" onchange="attachFile(this,'pf3-badge','pf3-name')"/>
             <button class="btn-attach danger" onclick="this.closest('.proj-file').remove()">Remove</button>
           </div>
@@ -519,18 +554,9 @@ input[type="file"]{display:none;}
     </div>
     <div class="sidebar-card-body">
       <div id="cert-list">
-        <div class="cert-item">
-          <div>Work System Design<br/><span class="cert-tag">IIT NPTEL</span></div>
-          <button class="remove-btn" onclick="this.closest('.cert-item').remove()">✕</button>
-        </div>
-        <div class="cert-item">
-          <div>Fundamentals of AI<br/><span class="cert-tag">IIT NPTEL</span></div>
-          <button class="remove-btn" onclick="this.closest('.cert-item').remove()">✕</button>
-        </div>
-        <div class="cert-item">
-          <div>Product Design and Manufacturing<br/><span class="cert-tag">IIT NPTEL</span></div>
-          <button class="remove-btn" onclick="this.closest('.cert-item').remove()">✕</button>
-        </div>
+        <div class="cert-item"><div>Work System Design<br/><span class="cert-tag">IIT NPTEL</span></div><button class="remove-btn" onclick="this.closest('.cert-item').remove()">✕</button></div>
+        <div class="cert-item"><div>Fundamentals of AI<br/><span class="cert-tag">IIT NPTEL</span></div><button class="remove-btn" onclick="this.closest('.cert-item').remove()">✕</button></div>
+        <div class="cert-item"><div>Product Design and Manufacturing<br/><span class="cert-tag">IIT NPTEL</span></div><button class="remove-btn" onclick="this.closest('.cert-item').remove()">✕</button></div>
       </div>
     </div>
   </div>
@@ -546,16 +572,14 @@ input[type="file"]{display:none;}
     </div>
     <div class="sidebar-card-body">
       <div class="lang-row" id="lang-list">
-        <span class="lang-chip">English <button class="remove-btn" style="border:none;background:transparent;color:var(--ink3);cursor:pointer;font-size:0.65rem;padding:0 0 0 4px;" onclick="this.closest('.lang-chip').remove()">✕</button></span>
-        <span class="lang-chip">Tamil <button class="remove-btn" style="border:none;background:transparent;color:var(--ink3);cursor:pointer;font-size:0.65rem;padding:0 0 0 4px;" onclick="this.closest('.lang-chip').remove()">✕</button></span>
+        <span class="lang-chip">English <button style="border:none;background:transparent;color:var(--ink3);cursor:pointer;font-size:0.65rem;padding:0 0 0 4px;" onclick="this.closest('.lang-chip').remove()">✕</button></span>
+        <span class="lang-chip">Tamil <button style="border:none;background:transparent;color:var(--ink3);cursor:pointer;font-size:0.65rem;padding:0 0 0 4px;" onclick="this.closest('.lang-chip').remove()">✕</button></span>
       </div>
     </div>
   </div>
 
-  <!-- SIDEBAR CUSTOM SECTIONS -->
   <div id="sidebar-custom-sections"></div>
 
-  <!-- ADD CUSTOM SIDEBAR SECTION -->
   <div class="new-section-box" onclick="openCustomSectionModal('sidebar')">
     <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-2 10h-4v4h-2v-4H7v-2h4V7h2v4h4v2z"/></svg>
     <p>Add a new section to sidebar</p>
@@ -565,141 +589,191 @@ input[type="file"]{display:none;}
 </div>
 
 <script>
-let pfCount=3, currentCustomTarget='main', currentCustomSectionId=null;
+/* ── STATE ── */
+let editingJobId = null;
+let pfCount = 3;
+let currentCustomTarget = 'main';
+let currentCustomSectionId = null;
+let jobCounter = 2;
 
-function openModal(id){document.getElementById(id).classList.add('open');}
-function closeModal(id){document.getElementById(id).classList.remove('open');}
-document.querySelectorAll('.modal-overlay').forEach(o=>o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open');}));
+/* ── MODAL HELPERS ── */
+function openModal(id){ document.getElementById(id).classList.add('open'); }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.modal-overlay').forEach(o => {
+  o.addEventListener('click', e => { if(e.target === o) o.classList.remove('open'); });
+});
 
-/* EXPERIENCE */
-function saveExp(){
-  const t=v('exp-title'),c=v('exp-company'),d=v('exp-date'),b=v('exp-bullets');
-  if(!t)return;
-  const bullets=b.split('\n').filter(x=>x.trim()).map(x=>`<li>${x.trim()}</li>`).join('');
-  const html=`<div class="job">
+/* ── EDIT EXPERIENCE (existing jobs) ── */
+function openEditExp(jobId) {
+  editingJobId = jobId;
+  const title = document.getElementById(jobId+'-title').textContent;
+  const company = document.getElementById(jobId+'-company').textContent;
+  const date = document.getElementById(jobId+'-date').textContent;
+  const bullets = Array.from(document.getElementById(jobId+'-bullets').querySelectorAll('li'))
+    .map(li => li.textContent.trim()).join('\n');
+
+  document.getElementById('ee-title').value = title;
+  document.getElementById('ee-company').value = company;
+  document.getElementById('ee-date').value = date;
+  document.getElementById('ee-bullets').value = bullets;
+  document.getElementById('edit-exp-heading').textContent = 'Edit: ' + title;
+  openModal('modal-edit-exp');
+}
+
+function applyEditExp() {
+  if(!editingJobId) return;
+  const title = document.getElementById('ee-title').value.trim();
+  const company = document.getElementById('ee-company').value.trim();
+  const date = document.getElementById('ee-date').value.trim();
+  const bulletsRaw = document.getElementById('ee-bullets').value;
+
+  if(title) document.getElementById(editingJobId+'-title').textContent = title;
+  if(company) document.getElementById(editingJobId+'-company').innerHTML = company;
+  if(date) document.getElementById(editingJobId+'-date').textContent = date;
+
+  const bulletsEl = document.getElementById(editingJobId+'-bullets');
+  bulletsEl.innerHTML = bulletsRaw.split('\n')
+    .filter(l => l.trim())
+    .map(l => `<li>${l.trim()}</li>`)
+    .join('');
+
+  closeModal('modal-edit-exp');
+  editingJobId = null;
+}
+
+/* ── ADD EXPERIENCE ── */
+function saveExp() {
+  const t = v('exp-title'), c = v('exp-company'), d = v('exp-date'), b = v('exp-bullets');
+  if(!t) return;
+  jobCounter++;
+  const jid = 'j' + jobCounter;
+  const bullets = b.split('\n').filter(x=>x.trim()).map(x=>`<li>${x.trim()}</li>`).join('');
+  const html = `<div class="job" data-jobid="${jid}">
     <div class="job-header">
-      <div><div class="job-title">${t}</div><div class="job-company">${c}</div></div>
-      <span class="job-date">${d}</span>
+      <div>
+        <div class="job-title" id="${jid}-title">${t}</div>
+        <div class="job-company" id="${jid}-company">${c}</div>
+      </div>
+      <span class="job-date" id="${jid}-date">${d}</span>
     </div>
-    ${bullets?`<ul class="job-bullets">${bullets}</ul>`:''}
-    <button class="remove-btn" style="margin-top:8px" onclick="this.closest('.job').remove()">✕ Remove</button>
+    <ul class="job-bullets" id="${jid}-bullets">${bullets}</ul>
+    <div class="job-actions">
+      <button class="job-btn" onclick="openEditExp('${jid}')">
+        <svg viewBox="0 0 24 24"><path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z"/></svg>
+        Edit
+      </button>
+      <button class="job-btn danger" onclick="this.closest('.job').remove()">
+        <svg viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+        Remove
+      </button>
+    </div>
   </div>`;
-  document.getElementById('exp-list').insertAdjacentHTML('beforeend',html);
+  document.getElementById('exp-list').insertAdjacentHTML('beforeend', html);
   clearFields(['exp-title','exp-company','exp-date','exp-bullets']);
   closeModal('modal-exp');
 }
 
-/* EDUCATION */
-function saveEdu(){
+/* ── EDUCATION ── */
+function saveEdu() {
   const d=v('edu-deg'),s=v('edu-school'),m=v('edu-meta');
-  if(!d)return;
-  const html=`<div class="edu-item">
+  if(!d) return;
+  const html = `<div class="edu-item">
     <div class="edu-deg">${d}</div>
     <div class="edu-school">${s}</div>
     <div class="edu-meta">${m}</div>
     <button class="remove-btn" style="margin-top:6px" onclick="this.closest('.edu-item').remove()">✕ Remove</button>
   </div>`;
-  document.getElementById('edu-list').insertAdjacentHTML('beforeend',html);
+  document.getElementById('edu-list').insertAdjacentHTML('beforeend', html);
   clearFields(['edu-deg','edu-school','edu-meta']);
   closeModal('modal-edu');
 }
 
-/* SKILLS */
-function saveSkill(){
-  const cat=v('skill-cat'),items=v('skill-items'),style=v('skill-style');
-  if(!cat||!items)return;
-  const safeId='sr-'+cat.replace(/\s+/g,'-');
-  const pills=items.split(',').map(s=>`<span class="pill ${style}">${s.trim()}</span>`).join('');
-  const existing=document.getElementById(safeId);
+/* ── SKILLS ── */
+function saveSkill() {
+  const cat=v('skill-cat'),items=v('skill-items'),style=document.getElementById('skill-style').value;
+  if(!cat||!items) return;
+  const safeId = 'sr-'+cat.replace(/\s+/g,'-');
+  const pills = items.split(',').map(s=>`<span class="pill ${style}">${s.trim()}</span>`).join('');
+  const existing = document.getElementById(safeId);
   if(existing){
-    existing.querySelector('.skill-pills').insertAdjacentHTML('beforeend',pills);
+    existing.querySelector('.skill-pills').insertAdjacentHTML('beforeend', pills);
   } else {
-    const html=`<div class="skill-row" id="${safeId}">
+    const html = `<div class="skill-row" id="${safeId}">
       <span class="skill-cat">${cat}</span>
       <div class="skill-pills">${pills}</div>
       <button class="remove-btn" onclick="this.closest('.skill-row').remove()">✕</button>
     </div>`;
-    document.getElementById('skills-list').insertAdjacentHTML('beforeend',html);
+    document.getElementById('skills-list').insertAdjacentHTML('beforeend', html);
   }
   clearFields(['skill-cat','skill-items']);
+  document.getElementById('skill-style').value = '';
   closeModal('modal-skill');
 }
 
-/* ACHIEVEMENTS */
-function saveAch(){
-  const t=v('ach-text');
-  if(!t)return;
-  const li=document.createElement('li');
-  li.innerHTML=`${t} <button class="remove-btn" onclick="this.closest('li').remove()">✕</button>`;
+/* ── ACHIEVEMENTS ── */
+function saveAch() {
+  const t=v('ach-text'); if(!t) return;
+  const li = document.createElement('li');
+  li.innerHTML = `${t} <button class="remove-btn" onclick="this.closest('li').remove()">✕</button>`;
   document.getElementById('ach-list').appendChild(li);
   clearFields(['ach-text']);
   closeModal('modal-ach');
 }
 
-/* CERTIFICATIONS */
-function saveCert(){
-  const n=v('cert-name'),i=v('cert-issuer');
-  if(!n)return;
-  const html=`<div class="cert-item">
+/* ── CERTIFICATIONS ── */
+function saveCert() {
+  const n=v('cert-name'),i=v('cert-issuer'); if(!n) return;
+  const html = `<div class="cert-item">
     <div>${n}${i?`<br/><span class="cert-tag">${i}</span>`:''}</div>
     <button class="remove-btn" onclick="this.closest('.cert-item').remove()">✕</button>
   </div>`;
-  document.getElementById('cert-list').insertAdjacentHTML('beforeend',html);
+  document.getElementById('cert-list').insertAdjacentHTML('beforeend', html);
   clearFields(['cert-name','cert-issuer']);
   closeModal('modal-cert');
 }
 
-/* LANGUAGES */
-function saveLang(){
-  const n=v('lang-name'),l=v('lang-level');
-  if(!n)return;
-  const chip=document.createElement('span');
-  chip.className='lang-chip';
-  chip.innerHTML=`${n}${l?` <small style="color:var(--ink3);font-size:0.7rem">(${l})</small>`:''} <button style="border:none;background:transparent;color:var(--ink3);cursor:pointer;font-size:0.65rem;padding:0 0 0 4px;" onclick="this.closest('.lang-chip').remove()">✕</button>`;
+/* ── LANGUAGES ── */
+function saveLang() {
+  const n=v('lang-name'),l=v('lang-level'); if(!n) return;
+  const chip = document.createElement('span');
+  chip.className = 'lang-chip';
+  chip.innerHTML = `${n}${l?` <small style="color:var(--ink3);font-size:0.7rem">(${l})</small>`:''} <button style="border:none;background:transparent;color:var(--ink3);cursor:pointer;font-size:0.65rem;padding:0 0 0 4px;" onclick="this.closest('.lang-chip').remove()">✕</button>`;
   document.getElementById('lang-list').appendChild(chip);
   clearFields(['lang-name','lang-level']);
   closeModal('modal-lang');
 }
 
-/* PROJECTS */
-function saveProj(){
-  const t=v('proj-title'),d=v('proj-desc');
-  if(!t)return;
+/* ── PROJECTS ── */
+function saveProj() {
+  const t=v('proj-title'),d=v('proj-desc'); if(!t) return;
   pfCount++;
   const bid='pb'+pfCount, nid='pn'+pfCount, fid='fi'+pfCount;
-  const html=`<div class="proj-file">
+  const html = `<div class="proj-file">
     <div class="proj-file-name">${t}</div>
     <div class="proj-file-desc">${d}</div>
     <div id="${bid}" class="file-badge"><svg style="width:12px;height:12px;fill:var(--green)" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg><span id="${nid}"></span></div>
     <div class="proj-file-actions">
-      <label class="btn-attach primary" for="${fid}"><svg style="width:11px;height:11px;fill:#fff" viewBox="0 0 24 24"><path d="M16.5 6v11.5c0 2.21-1.79 4-4 4s-4-1.79-4-4V5c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5v10.5c0 .55-.45 1-1 1s-1-.45-1-1V6H10v9.5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5V5c0-2.21-1.79-4-4-4S7 2.79 7 5v12.5c0 3.04 2.46 5.5 5.5 5.5s5.5-2.46 5.5-5.5V6h-1.5z"/></svg> Attach file</label>
+      <label class="btn-attach primary" for="${fid}"><svg style="width:11px;height:11px;fill:#fff" viewBox="0 0 24 24"><path d="M16.5 6v11.5c0 2.21-1.79 4-4 4s-4-1.79-4-4V5c0-1.38 1.12-2.5 2.5-2.5s2.5 1.12 2.5 2.5v10.5c0 .55-.45 1-1 1s-1-.45-1-1V6H10v9.5c0 1.38 1.12 2.5 2.5 2.5s2.5-1.12 2.5-2.5V5c0-2.21-1.79-4-4-4S7 2.79 7 5v12.5c0 3.04 2.46 5.5 5.5 5.5s5.5-2.46 5.5-5.5V6h-1.5z"/></svg> Attach</label>
       <input type="file" id="${fid}" accept=".pdf,.docx,.pptx,.zip,.png,.jpg" onchange="attachFile(this,'${bid}','${nid}')"/>
       <button class="btn-attach danger" onclick="this.closest('.proj-file').remove()">Remove</button>
     </div>
   </div>`;
-  document.getElementById('proj-list').insertAdjacentHTML('beforeend',html);
+  document.getElementById('proj-list').insertAdjacentHTML('beforeend', html);
   clearFields(['proj-title','proj-desc']);
   closeModal('modal-proj');
 }
 
-/* CUSTOM SECTIONS */
-function openCustomSectionModal(target){
-  currentCustomTarget=target;
-  openModal('modal-custom-section');
-}
+/* ── CUSTOM SECTIONS ── */
+function openCustomSectionModal(target){ currentCustomTarget=target; openModal('modal-custom-section'); }
 
-function saveCustomSection(){
-  const title=v('custom-sec-title');
-  if(!title)return;
+function saveCustomSection() {
+  const title=v('custom-sec-title'); if(!title) return;
   const secId='cs-'+Date.now();
-  currentCustomSectionId=secId;
+  currentCustomSectionId = secId;
   if(currentCustomTarget==='main'){
     const html=`<div class="section" id="${secId}">
       <div class="sec-head">
-        <div class="sec-head-left">
-          <svg class="si" viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
-          ${title}
-        </div>
+        <div class="sec-head-left"><svg class="si" viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>${title}</div>
         <div style="display:flex;gap:6px">
           <button class="add-btn" onclick="openCustomItemModal('${secId}','${title}')">+ Add</button>
           <button class="add-btn" style="border-color:#c0392b;color:#c0392b" onclick="document.getElementById('${secId}').remove()">Remove section</button>
@@ -733,9 +807,9 @@ function openCustomItemModal(secId,secTitle){
 
 function saveCustomItem(){
   const n=v('custom-item-name'),d=v('custom-item-detail');
-  if(!n||!currentCustomSectionId)return;
+  if(!n||!currentCustomSectionId) return;
   const container=document.getElementById(currentCustomSectionId+'-items');
-  if(!container)return;
+  if(!container) return;
   const html=`<div class="custom-item">
     <div><strong style="font-size:0.86rem;font-weight:500">${n}</strong>${d?`<br/><span style="font-size:0.78rem;color:var(--ink3)">${d}</span>`:''}</div>
     <button class="remove-btn" onclick="this.closest('.custom-item').remove()">✕</button>
@@ -745,16 +819,17 @@ function saveCustomItem(){
   closeModal('modal-custom-item');
 }
 
-/* FILE ATTACH */
+/* ── FILE ATTACH ── */
 function attachFile(input,badgeId,nameId){
-  if(!input.files||!input.files[0])return;
+  if(!input.files||!input.files[0]) return;
   const badge=document.getElementById(badgeId);
   document.getElementById(nameId).textContent=input.files[0].name;
   badge.style.display='inline-flex';
 }
 
-function v(id){return document.getElementById(id).value.trim();}
-function clearFields(ids){ids.forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});}
+/* ── UTILS ── */
+function v(id){ return document.getElementById(id).value.trim(); }
+function clearFields(ids){ ids.forEach(id=>{ const el=document.getElementById(id); if(el) el.value=''; }); }
 </script>
 </body>
 </html>
